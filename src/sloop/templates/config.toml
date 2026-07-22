@@ -1,0 +1,38 @@
+# SLoop configuration — edit `goal`, then run: sloop activate
+goal = "CHANGE ME: describe what to build, concretely"
+
+# Optional direction for the idea agent
+seed_ideas = [
+    # "Start with a minimal CLI skeleton",
+]
+
+# Hard rules every agent must respect
+constraints = [
+    # "Python only, stdlib only",
+    # "Never touch files under legacy/",
+]
+
+max_concurrent = 2
+
+# Full test suite, run once during wrap-up (recommended once tests exist)
+# test_command = "pytest -q"
+
+tick_seconds = 2.0
+verify_timeout_seconds = 600
+max_attempts = 3            # tries per task before it is blocked
+max_tasks_per_proposal = 5
+
+[budget]
+# Primary gauge — wrap-up starts at wrap_up_at * budget, whichever is hit first.
+# max_cost_usd = 10.0
+max_wall_clock_min = 240
+wrap_up_at = 0.8
+
+[agents]
+# model = "sonnet"          # default: your Claude Code default model
+# idea_model = "opus"
+# build_model = "sonnet"
+# review_model = "sonnet"
+permission_mode = "bypassPermissions"   # build agent runs unattended inside its own worktree
+max_turns = 80
+job_timeout_seconds = 1800              # hard cap per model call (30 min)
